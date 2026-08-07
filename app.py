@@ -1126,6 +1126,27 @@ de estabilidade de sistemas, compressão de dados (PCA), Google PageRank, entre 
                 add_vetor_2d(fig, vet[0, 1], vet[1, 1], "red", f"λ={val[1]:.1f}")
             st.plotly_chart(fig, use_container_width=True)
 
+    with aba_exemplo:
+        st.subheader("📝 Exemplo Resolvido Passo a Passo")
+        st.markdown(
+            r"""
+Dada a matriz $A = \begin{bmatrix} 2 & 1 \\ 0 & 3 \end{bmatrix}$, vamos encontrar seus autovalores e autovetores:
+
+### 1. Equação Característica
+Calculamos $\det(A - \lambda I) = 0$:
+$$\det\begin{bmatrix} 2-\lambda & 1 \\ 0 & 3-\lambda \end{bmatrix} = (2-\lambda)(3-\lambda) = 0$$
+Portanto, os autovalores são **$\lambda_1 = 2$** e **$\lambda_2 = 3$**.
+
+### 2. Determinando os Autovetores
+* **Para $\lambda_1 = 2$:**
+  Substituindo na matriz $(A - 2I)\vec{v} = 0$, obtemos o autovetor:
+  $$\vec{v}_1 = \begin{bmatrix} 1 \\ 0 \end{bmatrix}$$
+* **Para $\lambda_2 = 3$:**
+  Substituindo na matriz $(A - 3I)\vec{v} = 0$, obtemos o autovetor:
+  $$\vec{v}_2 = \begin{bmatrix} 1 \\ 1 \end{bmatrix}$$
+            """
+        )
+
     with aba_quiz:
         renderizar_quiz(topico)
 
