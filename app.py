@@ -1129,7 +1129,7 @@ de estabilidade de sistemas, compressão de dados (PCA), Google PageRank, entre 
     with aba_exemplo:
         st.subheader("📝 Exemplo Resolvido Passo a Passo")
         st.markdown(
-            r"""
+            """
 Dada a matriz $A = \begin{bmatrix} 2 & 1 \\ 0 & 3 \end{bmatrix}$, vamos encontrar seus autovalores e autovetores:
 
 ### 1. Equação Característica
