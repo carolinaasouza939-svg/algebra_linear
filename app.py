@@ -1104,29 +1104,27 @@ de estabilidade de sistemas, compressão de dados (PCA), Google PageRank, entre 
             d = st.number_input("a22", value=3.0)
         A = np.array([[a, b], [c, d]])
         val, vet = np.linalg.eig(A)
-        for i in range(len(val)):
-            st.latex(rf"\lambda_{i+1} = {val[i]:.2f} \quad \vec{{v}}_{i+1} = \begin{{bmatrix}} {vet[0,i]:.2f} \\ {vet[1,i]:.2f} \end{{bmatrix}}")
-        fig = criar_grafico_2d(5)
-        add_vetor_2d(fig, vet[0, 0], vet[1, 0], "purple", f"λ={val[0]:.1f}")
-        if len(val) > 1:
-            add_vetor_2d(fig, vet[0, 1], vet[1, 1], "red", f"λ={val[1]:.1f}")
-        st.plotly_chart(fig, use_container_width=True)
 
-    with aba_exemplo:
-        st.markdown(
-            r"""
-**Problema:** Encontre os autovalores de $A = \begin{bmatrix} 2 & 0 \\ 0 & 3 \end{bmatrix}$.
-
-**Passo 1.** Montamos $A - \lambda I$:
-$$\begin{bmatrix} 2-\lambda & 0 \\ 0 & 3-\lambda \end{bmatrix}$$
-
-**Passo 2.** Calculamos o determinante e igualamos a zero:
-$$(2-\lambda)(3-\lambda) = 0$$
-
-**Resultado:** $\lambda_1 = 2$ e $\lambda_2 = 3$. Para matrizes diagonais, os autovalores são
-sempre os próprios elementos da diagonal!
-            """
-        )
+        if np.iscomplexobj(val) and np.any(np.abs(val.imag) > 1e-9):
+            st.warning(
+                "Essa matriz tem **autovalores complexos** — ou seja, não existem "
+                "autovetores reais (visualizáveis como setas no plano). Isso costuma "
+                "acontecer com matrizes de rotação, onde nenhum vetor mantém sua direção "
+                "original. Experimente outros valores, por exemplo uma matriz diagonal "
+                "(a12 = 0, a21 = 0), para ver autovalores reais."
+            )
+            st.latex(rf"\lambda_1 = {val[0].real:.2f} {'+' if val[0].imag >= 0 else '-'} {abs(val[0].imag):.2f}i")
+            st.latex(rf"\lambda_2 = {val[1].real:.2f} {'+' if val[1].imag >= 0 else '-'} {abs(val[1].imag):.2f}i")
+        else:
+            val = val.real
+            vet = vet.real
+            for i in range(len(val)):
+                st.latex(rf"\lambda_{i+1} = {val[i]:.2f} \quad \vec{{v}}_{i+1} = \begin{{bmatrix}} {vet[0,i]:.2f} \\ {vet[1,i]:.2f} \end{{bmatrix}}")
+            fig = criar_grafico_2d(5)
+            add_vetor_2d(fig, vet[0, 0], vet[1, 0], "purple", f"λ={val[0]:.1f}")
+            if len(val) > 1:
+                add_vetor_2d(fig, vet[0, 1], vet[1, 1], "red", f"λ={val[1]:.1f}")
+            st.plotly_chart(fig, use_container_width=True)
 
     with aba_quiz:
         renderizar_quiz(topico)
