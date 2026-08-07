@@ -1145,8 +1145,8 @@ Portanto, os autovalores são **$\lambda_1 = 2$** e **$\lambda_2 = 3$**.
   Substituindo na matriz $(A - 3I)\vec{v} = 0$, obtemos o autovetor:
   $$\vec{v}_2 = \begin{bmatrix} 1 \\ 1 \end{bmatrix}$$
             """
+      st.info("💡 Dica: Vá até a aba Interativo e configure a matriz com $a_{11} = 2$, $a_{12} = 1$, $a_{21} = 0$ e $a_{22} = 3$ para conferir visualmente!")
     )
-    st.info("💡 Dica: Vá até a aba Interativo e configure a matriz com $a_{11} = 2$, $a_{12} = 1$, $a_{21} = 0$ e $a_{22} = 3$ para conferir visualmente!")
 
     with aba_quiz:
         renderizar_quiz(topico)
